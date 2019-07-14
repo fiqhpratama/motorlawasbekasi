@@ -42,6 +42,11 @@
                                                                               <option value='' selected>- Pilih Sub Kategori Produk -</option>
                                                                             </td></tr>
                     <tr><th width='130px' scope='row'>Nama Produk</th>  <td><input type='text' class='form-control' name='b' required></td></tr>
+                    <tr><th scope='row'>Jenis Produk</th> <td>
+                    <select class='form-control'  name='jenis_barang'>
+                      <option selected value='kendaraan'>Kendaraan</option>
+                      <option value='sparepart'>Sparepart</option>
+                    </select></td></tr>
                     <tr><th scope='row'>Satuan</th>                     <td><input type='text' class='form-control' name='c'></td></tr>
                     <tr><th scope='row'>Berat / Gram</th>                      <td><input type='number' class='form-control' name='berat'></td></tr>
                     <tr><th scope='row'>Harga Modal</th>                 <td><input type='number' class='form-control' name='d'></td></tr>

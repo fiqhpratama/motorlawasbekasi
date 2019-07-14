@@ -198,6 +198,15 @@ class Members extends CI_Controller {
 		$this->template->load(template().'/template',template().'/reseller/members/view_keranjang_detail',$data);
 	}
 
+	function konfirmasi_penerimaan(){
+		cek_session_members();
+		$id_penjualan = $this->input->get('id');
+		$this->db->set('proses', "3");
+		$this->db->where('id_penjualan', $id_penjualan);
+		$this->db->update('rb_penjualan');
+		redirect(base_url());
+	}
+
 	function keranjang_delete(){
 		$id = array('id_penjualan_detail' => $this->uri->segment(3));
 		$this->model_app->delete('rb_penjualan_detail',$id);

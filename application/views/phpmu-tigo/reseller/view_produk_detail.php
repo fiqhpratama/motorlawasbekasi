@@ -82,22 +82,23 @@ echo "<div class='col-md-12'>
             echo "</table>
 
 
-            <div class='alert alert-warning' style='border-radius:0px'>
+            <div class='alert alert-success' style='border-radius:0px'>
               <span style='color:orange' class='glyphicon glyphicon-ok'></span>
-              <b>Jaminan 100% Aman</b><br>
+              <b>Jaminan kualitas !</b><br>
               Uang pasti kembali. Sistem pembayaran bebas penipuan.<br>
-              Barang tidak sesuai pesanan? Ikuti langkah retur barang di sini.
+              <b>Khusus pembelian Unit Kendaraan, silahkan datang langsung ke tempat</b>
             </div>";
 
-            if ($this->session->level=='konsumen'){
-                echo "<center><a class='btn btn-success btn-block btn-lg' href='".base_url()."members/keranjang/$record[id_reseller]/$record[id_produk]'>Beli Sekarang</a></center>";
-            }else{
-                echo "<center><a class='btn btn-success btn-block btn-lg' href='".base_url()."produk/keranjang/$record[id_reseller]/$record[id_produk]'>Beli Sekarang</a></center>";
-            }
+            if ($record['jenis_barang'] != 'kendaraan') {
+                if ($this->session->level=='konsumen'){
+                    echo "<center><a class='btn btn-success btn-block btn-lg' href='".base_url()."members/keranjang/$record[id_reseller]/$record[id_produk]'>Beli Sekarang</a></center>";
+                }else{
+                    echo "<center><a class='btn btn-success btn-block btn-lg' href='".base_url()."produk/keranjang/$record[id_reseller]/$record[id_produk]'>Beli Sekarang</a></center>";
+                }
+            }   
+            
 
-        echo "<br><a target='_BLANK' class='btn btn-default btn-sm' href='https://api.whatsapp.com/send?phone=$rows[no_telpon]&amp;text=$record[nama_produk],... Apakah%20Stok%20Masih%20ada?...'><span class='glyphicon glyphicon-comment'></span>  Apakah Stok Masih ada?</a> 
-                <a target='_BLANK' class='btn btn-default btn-sm' href='https://api.whatsapp.com/send?phone=$rows[no_telpon]&amp;text=$record[nama_produk],... Saya%20Pesan%20Sekarang%20ya!'><span class='glyphicon glyphicon-comment'></span> Saya Pesan Sekarang ya!</a>
-                <a target='_BLANK' class='btn btn-default btn-sm' href='https://api.whatsapp.com/send?phone=$rows[no_telpon]&amp;text=Assalam,%20Haloo!%20$rows[nama_reseller],%20Saya%20Mau%20Order%20Produknya...'><span style='color:green' class='glyphicon glyphicon-certificate'></span> Chat dengan Pelapak.</a>
+        echo "<br><a target='_BLANK' class='btn btn-primary btn-block' href='https://api.whatsapp.com/send?phone=$rows[no_telpon]&amp;text=Haloo!%20$rows[nama_reseller],%20Saya%20Mau%20Order%20Produknya...'><span style='color:white' class='glyphicon glyphicon-certificate'></span> Chat dengan Pelapak.</a>
         </div>
         </div>
         <div class='col-md-12' style='padding:0px'>

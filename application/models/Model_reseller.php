@@ -1,14 +1,5 @@
 <?php 
-/*
--- ---------------------------------------------------------------
--- MARKETPLACE MULTI BUYER MULTI SELLER + SUPPORT RESELLER SYSTEM
--- CREATED BY : ROBBY PRIHANDAYA
--- COPYRIGHT  : Copyright (c) 2018 - 2019, PHPMU.COM. (https://phpmu.com/)
--- LICENSE    : http://opensource.org/licenses/MIT  MIT License
--- CREATED ON : 2019-03-26
--- UPDATED ON : 2019-03-27
--- ---------------------------------------------------------------
-*/
+
 class Model_reseller extends CI_model{
     function top_menu(){
         return $this->db->query("SELECT * FROM menu where position='Top' ORDER BY urutan ASC");
@@ -218,7 +209,7 @@ class Model_reseller extends CI_model{
 
     function penjualan($id_reseller){
         return $this->db->query("SELECT sum((a.jumlah*a.harga_jual)-a.diskon) as total, sum(a.jumlah) as produk FROM `rb_penjualan_detail` a JOIN rb_produk b ON a.id_produk=b.id_produk
-                                    JOIN rb_penjualan c ON a.id_penjualan=c.id_penjualan where c.status_penjual='reseller' AND b.id_produk_perusahaan='0' AND id_penjual='".$id_reseller."' AND c.proses='1'");
+                                    JOIN rb_penjualan c ON a.id_penjualan=c.id_penjualan where c.status_penjual='reseller' AND b.id_produk_perusahaan='0' AND id_penjual='".$id_reseller."' AND c.proses='3'");
     }
 
     function modal_perusahaan($id_reseller){

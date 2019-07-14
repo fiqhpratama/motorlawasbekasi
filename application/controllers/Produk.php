@@ -428,7 +428,7 @@ class Produk extends CI_Controller {
 			}else{
 				$data['title'] = 'Data Pelanggan';
 				$data['provinsi'] = $this->model_app->view_ordering('rb_provinsi','provinsi_id','DESC');
-				$this->template->load('phpmu-tigo/template','phpmu-tigo/view_checkouts',$data);
+				$this->template->load('phpmu-tigo/template','phpmu-tigo/reseller/view_checkouts',$data);
 				$this->template->load(template().'/template',template().'/reseller/view_checkouts',$data);
 			}
 		}

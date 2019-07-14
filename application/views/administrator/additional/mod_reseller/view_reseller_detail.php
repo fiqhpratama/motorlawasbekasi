@@ -8,10 +8,10 @@
                   <div class='panel-body'>
                     <ul id='myTabs' class='nav nav-tabs' role='tablist'>
                       <li role='presentation' class='active'><a href='#profile' id='profile-tab' role='tab' data-toggle='tab' aria-controls='profile' aria-expanded='true'>Data Konsumen </a></li>
-                      <li role='presentation' class=''><a href='#pembelian' role='tab' id='pembelian-tab' data-toggle='tab' aria-controls='pembelian' aria-expanded='false'>History Pembelian</a></li>
+                      <!-- <li role='presentation' class=''><a href='#pembelian' role='tab' id='pembelian-tab' data-toggle='tab' aria-controls='pembelian' aria-expanded='false'>History Pembelian</a></li> -->
                       <li role='presentation' class=''><a href='#penjualan' role='tab' id='penjualan-tab' data-toggle='tab' aria-controls='penjualan' aria-expanded='false'>History Penjualan</a></li>
-                      <li role='presentation' class=''><a href='#keuangan' role='tab' id='keuangan-tab' data-toggle='tab' aria-controls='keuangan' aria-expanded='false'>Data Keuangan dan Referral</a></li>
-                      <li role='presentation' class=''><a href='#keuangan1' role='tab' id='keuangan1-tab' data-toggle='tab' aria-controls='keuangan1' aria-expanded='false'>Data Penjualan dan Bonus Reward</a></li>
+                      <!-- <li role='presentation' class=''><a href='#keuangan' role='tab' id='keuangan-tab' data-toggle='tab' aria-controls='keuangan' aria-expanded='false'>Data Keuangan dan Referral</a></li> -->
+                      <!-- <li role='presentation' class=''><a href='#keuangan1' role='tab' id='keuangan1-tab' data-toggle='tab' aria-controls='keuangan1' aria-expanded='false'>Data Penjualan dan Bonus Reward</a></li> -->
                     </ul><br>
 
                     <div id='myTabContent' class='tab-content'>
@@ -61,7 +61,15 @@
                             <?php 
                               $no = 1;
                               foreach ($record->result_array() as $row){
-                              if ($row['proses']=='0'){ $proses = '<i class="text-danger">Pending</i>'; }elseif($row['proses']=='1'){ $proses = '<i class="text-success">Proses</i>'; }else{ $proses = '<i class="text-info">Konfirmasi</i>'; }
+                              if ($row['proses']=='0'){ 
+                                $proses = '<i class="text-danger">Transaksi Pending</i>'; 
+                              }elseif($row['proses']=='1'){ 
+                                $proses = '<i class="text-success">Pesanan Diproses</i>'; 
+                              }elseif($row['proses']=='3'){ 
+                                $proses = '<i class="text-success">Transaksi Selesai</i>'; 
+                              }else{ 
+                                $proses = '<i class="text-info">Pembayaran Dikonfirmasi</i>'; 
+                              }
                               $total = $this->db->query("SELECT sum((a.harga_jual*a.jumlah)-a.diskon) as total FROM `rb_penjualan_detail` a where a.id_penjualan='$row[id_penjualan]'")->row_array();
                               if ($row['service']==''){ $service = "<i style='color:green'>Pembelian ke Pusat</i>"; }else{ $service = "<i style='color:blue'>$row[service]</i>"; }
                               echo "<tr><td>$no</td>
@@ -97,7 +105,15 @@
                             <?php 
                               $no = 1;
                               foreach ($penjualan->result_array() as $row){
-                              if ($row['proses']=='0'){ $proses = '<i class="text-danger">Pending</i>'; $status = 'Proses'; $icon = 'star-empty'; $ubah = 1; }elseif($row['proses']=='1'){ $proses = '<i class="text-success">Proses</i>'; $status = 'Pending'; $icon = 'star text-yellow'; $ubah = 0; }else{ $proses = '<i class="text-info">Konfirmasi</i>'; $status = 'Proses'; $icon = 'star'; $ubah = 1; }
+                              if ($row['proses']=='0'){ 
+                                $proses = '<i class="text-danger">Menunggu Pembayaran</i>'; $status = 'Proses'; $icon = 'star-empty'; $ubah = 1; 
+                              }elseif($row['proses']=='1'){ 
+                                $proses = '<i class="text-success">Pesanan Diproses</i>'; $status = 'Pending'; $icon = 'star text-yellow'; $ubah = 0; 
+                              }elseif($row['proses']=='3'){ 
+                                $proses = '<i class="text-success">Transaksi Selesai</i>'; $status = 'Success'; $icon = 'star text-green'; $ubah = 0; 
+                              }else{ 
+                                $proses = '<i class="text-info">Pembayaran Dikonfirmasi</i>'; $status = 'Proses'; $icon = 'star'; $ubah = 1; 
+                              }
                               $total = $this->db->query("SELECT sum((a.harga_jual*a.jumlah)-a.diskon) as total FROM `rb_penjualan_detail` a where a.id_penjualan='$row[id_penjualan]'")->row_array();
                               echo "<tr><td>$no</td>
                                         <td>$row[kode_transaksi]</td>

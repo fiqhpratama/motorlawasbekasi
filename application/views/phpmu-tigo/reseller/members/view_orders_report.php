@@ -23,8 +23,16 @@
                   <?php 
                     $no = 1;
                     foreach ($record->result_array() as $row){
-                    if ($row['proses']=='0'){ $proses = '<i class="text-danger">Pending</i>'; }elseif($row['proses']=='1'){ $proses = '<i class="text-success">Proses</i>'; }else{ $proses = '<i class="text-info">Konfirmasi</i>'; }
-                    $total = $this->db->query("SELECT sum((a.harga_jual*a.jumlah)-a.diskon) as total FROM `rb_penjualan_detail` a where a.id_penjualan='$row[id_penjualan]'")->row_array();
+                      if ($row['proses']=='0'){ 
+                        $proses = '<i class="text-danger">Menunggu Pembayaran</i>'; $status = 'Proses'; $icon = 'star-empty'; $ubah = 1; 
+                      }elseif($row['proses']=='1'){ 
+                        $proses = '<i class="text-success">Diproses</i>'; $status = 'Pending'; $icon = 'star text-yellow'; $ubah = 0; 
+                      }elseif($row['proses']=='3'){ 
+                        $proses = '<i class="text-success">Transaksi Selesai</i>'; $status = 'Selesai'; $icon = 'star text-success'; $ubah = 3; 
+                      }else{ 
+                        $proses = '<i class="text-info">Pembayaran Dikonfirmasi</i>'; $status = 'Proses'; $icon = 'star'; $ubah = 1; 
+                      }
+                      $total = $this->db->query("SELECT sum((a.harga_jual*a.jumlah)-a.diskon) as total FROM `rb_penjualan_detail` a where a.id_penjualan='$row[id_penjualan]'")->row_array();
                     echo "<tr><td rowspan='2'>$no</td>
                               <td><span class='text-success'>$row[kode_transaksi]</span></td>
                               <td><a href='".base_url()."members/detail_reseller/$row[id_reseller]'><b>$row[nama_reseller]</b></a></td>

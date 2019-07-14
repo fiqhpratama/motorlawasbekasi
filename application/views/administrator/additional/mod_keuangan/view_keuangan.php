@@ -10,12 +10,7 @@
                       <tr>
                         <th style='width:20px'>No</th>
                         <th>Nama Reseller</th>
-                        <th>Referral</th>
-                        <th>Belanja</th>
-                        <th>Penjualan Perusahaan</th>
-                        <th>Penjualan Pribadi</th>
-                        <th>Keuntungan</th>
-                        <th>Sisa Referral</th>
+                       
                         <th style='width:110px'>Action</th>
                       </tr>
                     </thead>
@@ -45,12 +40,6 @@
                     $pen = $this->db->query("SELECT sum(bonus_referral) as pencairan FROM rb_pencairan_bonus where id_reseller='$row[id_reseller]'")->row_array();
                     echo "<tr><td>$no</td>
                               <td>$row[nama_reseller]</td>
-                              <td style='color:red'>$row[referral]</td>
-                              <td>Rp ".rupiah($pembelian['total'])."</td>
-                              <td>Rp ".rupiah($penjualan_perusahaan['total'])."</td>
-                              <td>Rp ".rupiah($penjualan['total'])."</td>
-                              <td>Rp ".rupiah(($penjualan['total']+$penjualan_perusahaan['total'])-($modal_perusahaan['total']+$modal_pribadi['total']))."</td>
-                              <td>Rp ".rupiah($total_bonus-$pen['pencairan'])."</td>
                               <td><center>
                                 <a class='btn btn-success btn-xs' title='Detail Data' href='".base_url()."administrator/detail_reseller/$row[id_reseller]'><span class='glyphicon glyphicon-search'></span> Detail</a>
                                 <a class='btn btn-info btn-xs' title='Bayarkan Bonus Rerral' href='".base_url()."administrator/bayar_bonus/$row[id_reseller]'><span class='glyphicon glyphicon-ok'></span> Bayar</a>

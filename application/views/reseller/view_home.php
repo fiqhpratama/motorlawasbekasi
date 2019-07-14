@@ -7,17 +7,7 @@ $modal_pribadi = $this->model_reseller->modal_pribadi($this->session->id_reselle
 $set = $this->db->query("SELECT * FROM rb_setting where aktif='Y'")->row_array();
 ?>
 
-            <a style='color:#000' href='#'>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="fa fa-folder-open"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Total Belanja</span>
-                  <span class="info-box-number"><?php echo "Rp ".rupiah($pembelian['total']); ?></span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div><!-- /.col -->
-            </a>
+            
 
             <a style='color:#000' href='#'>
             <div class="col-md-3 col-sm-6 col-xs-12">

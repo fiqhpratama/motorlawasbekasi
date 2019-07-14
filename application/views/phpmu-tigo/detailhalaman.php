@@ -43,32 +43,6 @@
 				<div class="block-content">
 					<div class="shortcode-content">
 						<div class="paragraph-row">
-							<div class="column3">
-								<h3 class="highlight-title">Berita Foto Populer</h3>
-								<ul class="article-block">
-									<?php 
-										$beritafoto = $this->model_utama->view_ordering_limit('album','hits_album','DESC',0,5);
-										foreach ($beritafoto->result_array() as $r2) {	
-											echo "<li>
-													<div class='article-photo'>";
-														if ($r2['gbr_album'] ==''){
-															echo "<a href='".base_url()."album/detail/$r2[album_seo]' class='hover-effect'><img style='width:59px; height:42px;' src='".base_url()."asset/foto_berita/small_no-image.jpg' alt='small_no-image.jpg' /></a>";
-														}else{
-															echo "<a href='".base_url()."album/detail/$r2[album_seo]' class='hover-effect'><img style='width:59px; height:42px;' src='".base_url()."asset/img_album/$r2[gbr_album]' alt='$r2[gbr_album]' /></a>";
-														}
-													echo "</div>
-													<div class='article-content'>
-														<h4><a href='".base_url()."album/detail/$r2[album_seo]'>$r2[jdl_album]</a></h4>
-														<span class='meta'>
-															<a href='".base_url()."album/detail/$r2[album_seo]'><span class='icon-text'>&#128340;</span>$r2[jam], ".tgl_indo($r2['tgl_posting'])."</a>
-														</span>
-													</div>
-											</li>";
-										}
-									?>
-								</ul>
-							</div>
-
 							<div class="column9">
 								<?php 
 									if (trim($rows['gambar'])!=''){
@@ -83,19 +57,6 @@
 							</div>
 						</div><br>
 
-						<?php
-						$ia = $this->model_utama->view_ordering_limit('iklantengah','id_iklantengah','ASC',8,1)->row_array();
-						echo "<a href='$ia[url]' target='_blank'>";
-							$string = $ia['gambar'];
-							if ($ia['gambar'] != ''){
-								if(preg_match("/swf\z/i", $string)) {
-									echo "<embed style='margin-top:-10px' src='".base_url()."asset/foto_iklantengah/$ia[gambar]' width='100%' height=90px quality='high' type='application/x-shockwave-flash'>";
-								} else {
-									echo "<img style='margin-top:-10px; margin-bottom:5px' width='100%' src='".base_url()."asset/foto_iklantengah/$ia[gambar]' title='$ia[judul]' />";
-								}
-							}
-						echo "</a>";
-						?>
 
 						<div class="article-title">
 							<div class="share-block right">
@@ -126,6 +87,3 @@
 	</div>
 </div>
 
-<div class='main-sidebar right'>
-	<?php include "sidebar_halaman.php"; ?>
-</div>

@@ -27,11 +27,15 @@
                       $status = 'Proses'; 
                       $icon = 'star-empty'; $ubah = 1; 
                     }elseif ($row['proses']=='1'){
-                      $proses = '<i class="text-success">Proses</i>'; 
+                      $proses = '<i class="text-success">Pesanan diproses</i>'; 
                       $status = 'Pending Proses'; $icon = 'star text-yellow'; 
                       $ubah = 0; 
+                    }elseif ($row['proses']=='3'){
+                      $proses = '<i class="text-success">Transaksi Selesai</i>'; 
+                      $status = 'Transaksi Selesai'; $icon = 'star text-green'; 
+                      $ubah = 0; 
                     }elseif ($row['proses']=='2'){
-                      $proses = '<i class="text-info">Konfirmasi</i>'; 
+                      $proses = '<i class="text-info">Konfirmasi Pembayaran</i>'; 
                       $status = 'Konfirmasi Proses '; $icon = 'star text-yellow'; 
                       $ubah = 0; 
                     }
@@ -52,6 +56,8 @@
                                   echo "<a style='margin:0px 3px' class='btn btn-default btn-xs' title='Data sudah diproses' href='#' onclick=\"return confirm('Maaf, Data ini sudah di proses,..')\"><span class='glyphicon glyphicon-$icon'></span></a>";
                                 }elseif ($row['proses']=='2'){
                                   echo "<a style='margin:0px 3px' class='btn btn-primary btn-xs' title='$status Data' href='".base_url()."administrator/proses_penjualan/$row[id_penjualan]/1' onclick=\"return confirm('Apa anda yakin untuk ubah status jadi Proses dan stok Reseller (Pembeli) akan otomatis bertambah sesuai dengan orderannya ini?')\"><span class='glyphicon glyphicon-$icon'></span></a>";
+                                }elseif ($row['proses']=='3'){
+                                  echo "<a style='margin:0px 3px' class='btn btn-primary btn-xs disabled' title='$status Data' href='".base_url()."administrator/proses_penjualan/$row[id_penjualan]/1' onclick=\"return confirm('Apa anda yakin untuk ubah status jadi Proses dan stok Reseller (Pembeli) akan otomatis bertambah sesuai dengan orderannya ini?')\"><span class='glyphicon glyphicon-$icon'></span></a>";
                                 }
                                 echo "<a class='btn btn-warning btn-xs' title='Edit Data' href='".base_url()."administrator/edit_penjualan/$row[id_penjualan]'><span class='glyphicon glyphicon-edit'></span></a>
                                 <a class='btn btn-danger btn-xs' title='Delete Data' href='".base_url()."administrator/delete_penjualan/$row[id_penjualan]' onclick=\"return confirm('Apa anda yakin untuk hapus Data ini?')\"><span class='glyphicon glyphicon-remove'></span></a>

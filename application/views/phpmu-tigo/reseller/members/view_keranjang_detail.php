@@ -36,9 +36,17 @@
                 </tr>";
             $no++;
           }
+          $id_penjualan = $rows['id_penjualan'];
+          $url_proses = base_url('/members/konfirmasi_penerimaan');
           $detail = $this->db->query("SELECT * FROM rb_penjualan where id_penjualan='".$this->uri->segment(3)."'")->row_array();
           $total = $this->db->query("SELECT sum((a.harga_jual*a.jumlah)-a.diskon) as total, sum(b.berat*a.jumlah) as total_berat FROM `rb_penjualan_detail` a JOIN rb_produk b ON a.id_produk=b.id_produk where a.id_penjualan='".$this->uri->segment(3)."'")->row_array();
-          if ($rows['proses']=='0'){ $proses = '<i class="text-danger">Pending</i>'; $status = 'Proses'; }elseif($rows['proses']=='1'){ $proses = '<i class="text-success">Proses</i>'; }else{ $proses = '<i class="text-info">Konfirmasi</i>'; }
+          if ($rows['proses']=='0'){ 
+            $proses = '<i class="text-danger">Menunggu Respon Pelapak</i>'; $status = 'Proses'; 
+          }elseif($rows['proses']=='1'){ 
+            $proses = '<i class="text-success">Diproses Pelapak</i>'; 
+          }elseif($rows['proses']=='3'){ 
+            $proses = '<i class="text-success">Transaksi Selesai</i>'; 
+          }else{ $proses = '<i class="text-info">Pembayaran Dikonfirmasi</i>'; }
           echo "
                 <tr class='success'>
                   <td colspan='5'><b>Berat</b> <small><i class='pull-right'>(".terbilang($total['total_berat'])." Gram)</i></small></td>
@@ -61,7 +69,11 @@
                 </tr>
 
                 
-                <tr class='danger'><td align=center colspan='6'><b>$proses</b></td></tr>
+                <tr class='success'><td align=center colspan='6'><b>$proses</b></td></tr>
+                ";
 
-        </tbody>
-      </table>";
+                if($rows['proses']!='3'){
+                  echo "<tr class='success'><td align=center colspan='6'><a class='btn btn-success btn-block' href='$url_proses?id=$id_penjualan'>Konfirmasi penerimaan</a></td></tr>";
+                }
+                echo "</tbody>
+                </table>";
